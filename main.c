@@ -10,6 +10,9 @@ int	main(void)
 
 	printf("ITS ALIVE !! : %s\n", test);
 	free(test);
+	test = get_next_line(fd);
+	printf("ITS ALIVE !! : %s\n", test);
+	free(test);
 	close(fd);
 	return (0);
 }

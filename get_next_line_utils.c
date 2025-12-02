@@ -6,7 +6,7 @@
 /*   By: apeuget <audrey.peuget@learner.42.tech>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:16:53 by apeuget           #+#    #+#             */
-/*   Updated: 2025/12/02 00:50:00 by apeuget          ###   ########.fr       */
+/*   Updated: 2025/12/02 15:36:09 by apeuget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char	*ft_strdup(char *str)
 		printf("dup malloc is NULL :(");
 		return (NULL);
 	}
-	dup[BUFFER_SIZE] = '\0';
 	res = dup;
 	while (i < BUFFER_SIZE)
 	{
@@ -35,6 +34,7 @@ char	*ft_strdup(char *str)
 		i++;
 	}
 	//printf("dup of str in ft strdup = %s\n", res);
+	dup[i] = '\0';
 	return (res);
 }
 
@@ -67,7 +67,7 @@ int	ft_lstsize(t_list *lst)
 	return (count);
 }
 
-t_list	*ft_lstnew(t_list **lst, char *buffer, ssize_t line_len)
+t_list	*ft_lstnew(t_list **lst, char *buffer)
 {
 	t_list	*new;
 	t_list	*temp;
@@ -81,7 +81,7 @@ t_list	*ft_lstnew(t_list **lst, char *buffer, ssize_t line_len)
 	}
 	new -> read_content = ft_strdup(buffer); // faire un malloc de read_content ?
 	new -> next = NULL;
-	new -> len = line_len; //comment utiliser cette valeur ?
+	//new -> len = line_len; //comment utiliser cette valeur ?
 	if (lst && *lst)
 	{
 		temp = *lst;
@@ -99,6 +99,24 @@ t_list	*ft_lstnew(t_list **lst, char *buffer, ssize_t line_len)
 		//printf("first creation\n");
 	}
 	return (new);
+}
+
+int	back_n_0_check(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n' || str[i] == '\0')
+		{
+			//printf("there's a back n\n");
+			return (0);
+		}
+		i++;
+	}
+	//printf("there's no back n\n");
+	return (1);
 }
 
 // lst = adress of first node in list
