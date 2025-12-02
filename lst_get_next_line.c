@@ -6,26 +6,28 @@
 /*   By: apeuget <audrey.peuget@learner.42.tech>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 13:58:30 by apeuget           #+#    #+#             */
-/*   Updated: 2025/12/01 22:05:43 by apeuget          ###   ########.fr       */
+/*   Updated: 2025/12/02 01:23:14 by apeuget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	malloc_free(t_list **lst)
+char	*last_buffer_fill(char *final_line, char *buffer, int start_index)
 {
-	t_list	*tmp;
+	int i;
 
-	printf("help free malloc");
-	if (*lst)
+	i = 0;
+	//printf("the buffer iiiiis : %s\n", buffer);
+	while (buffer[i] != '\n')
 	{
-		while (*lst)
-		{
-			tmp = (*lst) -> next;
-			free(*lst);
-			*lst = tmp;
-		}
+		final_line[start_index + i] = buffer[i];
+		//printf("current final_line char : %c\n", final_line[start_index + i]);
+		//printf("current buffer char : %c\n", buffer[i]);
+		i++;
 	}
+	final_line[start_index + i] = '\0';
+	//printf("final_line should be : %s\n", final_line);
+	return (final_line);
 }
 
 ssize_t	finalline_fill(char *final_line, t_list *lst, char *buffer)
@@ -38,10 +40,28 @@ ssize_t	finalline_fill(char *final_line, t_list *lst, char *buffer)
 	{
 		buffer_index = 0;
 		while (buffer_index < BUFFER_SIZE)
-			final_line[line_index++] = lst -> read_content[buffer_index++];
+		final_line[line_index++] = lst -> read_content[buffer_index++];
 		lst = lst -> next;
 	}
-	return (line_index + 1);
+	//printf("final_line = %s\n", final_line);
+	//printf("line_index = %zi\n", line_index);
+	return (line_index);
+}
+
+void	malloc_free(t_list **lst)
+{
+	t_list	*tmp;
+
+	printf("vole tu es libre petit malloc !!");
+	if (*lst)
+	{
+		while (*lst)
+		{
+			tmp = (*lst) -> next;
+			free(*lst);
+			*lst = tmp;
+		}
+	}
 }
 
 int	back_n_0_check(char *str)
@@ -68,6 +88,7 @@ char	*get_next_line(int fd)
 	t_list		*lst;
 	char		*final_line;
 	ssize_t		return_value;
+	int			last_index;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
@@ -92,11 +113,16 @@ char	*get_next_line(int fd)
 	if (!final_line)
 	{
 		malloc_free(&lst);
+		printf("malloc of final_line doesn't work :((");
 		return (NULL); // a partir de la faire des free
 	}
-	final_line[finalline_fill(final_line, lst, buffer)] = '\0';
+	last_index = finalline_fill(final_line, lst, buffer);
+	final_line = last_buffer_fill(final_line, buffer, last_index);
 	return (final_line);
 }
+
+// PB : ne garde pas le buffer en mémoire, si on execute plusieurs fois, il repart du début du fichier a chaque fois
+// et print toujours la meme chose
 
 //TO ADD correct return value when done reading and all
 

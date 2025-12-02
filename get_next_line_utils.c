@@ -6,7 +6,7 @@
 /*   By: apeuget <audrey.peuget@learner.42.tech>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:16:53 by apeuget           #+#    #+#             */
-/*   Updated: 2025/12/01 23:18:09 by apeuget          ###   ########.fr       */
+/*   Updated: 2025/12/02 00:50:00 by apeuget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,25 @@ char	*ft_strdup(char *str)
 {
 	char	*dup;
 	char	*res;
+	int		i;
 
+	//printf("str parameter in ft strdup = %s\n", str);
+	i = 0;
 	dup = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!dup)
+	{
+		printf("dup malloc is NULL :(");
 		return (NULL);
+	}
 	dup[BUFFER_SIZE] = '\0';
 	res = dup;
-	while (*dup)
+	while (i < BUFFER_SIZE)
 	{
-		*(dup++) = *(str++);
+		//printf("I love to loop\n");
+		dup[i] = str[i];
+		i++;
 	}
+	//printf("dup of str in ft strdup = %s\n", res);
 	return (res);
 }
 
@@ -38,6 +47,7 @@ int	ft_strlen_before_n(char *str)
 	{
 		i++;
 	}
+	//printf("strlen before n of last buffer = %i", i);
 	return (i);
 }
 
@@ -53,6 +63,7 @@ int	ft_lstsize(t_list *lst)
 		nodeptr = nodeptr -> next;
 		count++;
 	}
+	//printf("lstsize = %i\n", count);
 	return (count);
 }
 
@@ -61,7 +72,7 @@ t_list	*ft_lstnew(t_list **lst, char *buffer, ssize_t line_len)
 	t_list	*new;
 	t_list	*temp;
 
-	printf("creating new node\n");
+	//printf("creating new node\n");
 	new = malloc(sizeof(t_list));
 	if (!new)
 	{
@@ -74,10 +85,10 @@ t_list	*ft_lstnew(t_list **lst, char *buffer, ssize_t line_len)
 	if (lst && *lst)
 	{
 		temp = *lst;
-		printf("this is the second node\n");
+		//printf("this is the next node\n");
 		while (temp -> next)
 		{
-			printf("in boucle\n");
+			//printf("in boucle\n");
 			temp = temp -> next;
 		}
 		temp -> next = new;
@@ -85,7 +96,7 @@ t_list	*ft_lstnew(t_list **lst, char *buffer, ssize_t line_len)
 	else if (lst && !*lst)
 	{
 		*lst = new;
-		printf("first creation\n");
+		//printf("first creation\n");
 	}
 	return (new);
 }
