@@ -6,30 +6,51 @@
 /*   By: apeuget <audrey.peuget@learner.42.tech>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 17:07:00 by apeuget           #+#    #+#             */
-/*   Updated: 2025/12/07 17:16:34 by apeuget          ###   ########.fr       */
+/*   Updated: 2025/12/07 23:12:35 by apeuget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_find_n(char *buffer)
+#include "get_next_line.h"
+
+t_list	*ft_lstnew_addback(t_list **head, char *buffer)
+{
+	t_list *new;
+	t_list *curr;
+
+	curr = *head;
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new -> content = buffer;
+	new -> next = NULL;
+	if (head && !*head)
+			*head = new;
+	else if (head && *head)
+	{
+		while (curr->next)
+			curr = curr->next;
+		curr->next = new;
+	}
+	return (new);
+}
+
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (buffer[i])
-	{
-		if (buffer[i] == '\n')
-			return (i);
+	while (str[i])
 		i++;
-	}
-	return (-1);
+	return (i);
 }
 
-ft_lstnew_addback()
+char	*ft_memmove(char *dest, char *src, int size)
 {
-	if (head && !*head)
-			*head = new;
-		else if (head && *head)
-		{
-			ft_lstnew_addback;
-		}
+	while (size != 0)
+	{
+		dest[size - 1] = src[size - 1];
+		size--;
+	}
+	dest[size] = '\0';
+	return (dest);
 }

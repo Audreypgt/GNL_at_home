@@ -6,7 +6,7 @@
 /*   By: apeuget <audrey.peuget@learner.42.tech>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 22:34:20 by apeuget           #+#    #+#             */
-/*   Updated: 2025/12/07 16:49:24 by apeuget          ###   ########.fr       */
+/*   Updated: 2025/12/07 22:14:21 by apeuget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 
 typedef struct s_list
 {
-	char			*read_content;
+	char			*content;
 	struct s_list	*next;
-	int				len;
+	//int				len;
 }	t_list;
 
 char	*get_next_line(int fd);

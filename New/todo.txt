@@ -14,7 +14,7 @@ creer-node et l'ajouter a la fin de la liste(buffer, lst)
 
 
 gnl()
-	1. get_content()
+	1. get_content() OK
 
 	2. remplire_la _ligne()
 
@@ -22,22 +22,22 @@ gnl()
 	Return  (la ligne)
 
 
-get_content(lst, buffer, fd)
-	if buffer[0] != 0
-		recuperer ce quil y a dedans
-		memcpy (pour gerer overlap) de ce qu'il y apres le \n dans le dernier bufffer a son  debut  ,
-suvi d'un \0
-		envoyer a ft_lstnew_addback
+get_content(lst, buffer, fd) OK
+	if buffer[0] != 0 OK
+		recuperer ce quil y a dedans OK
+		memmove (pour gerer overlap) de ce qu'il y apres le \n dans le dernier bufffer a son  debut  ,
+suvi d'un \0 OK
+		envoyer a ft_lstnew_addback OK
 	if ft_find_n est faux (donne position de n, si trouve pas renvoie -1)
 		while read > 0
-			lire fichier puis envoyer a ft_lstnew_addback
-			if ft_find_n || strlen < buffersize
-			 	return
+			lire fichier puis envoyer a ft_lstnew_addback OK
+			if ft_find_n || strlen < buffersize OK
+			 	return OK
 
-remplire_la _ligne()
+remplire_la_ligne() ! s'arreter au \n
 	malloc de la ligne (str_len_line_list + 1)
 	while (lst)
-		index += lst_copy(lst -> content, ligne + index)
+		index += lst_copy(head -> content, ligne + index)
 
 str_len_line_list
 	int i
