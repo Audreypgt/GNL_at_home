@@ -1,0 +1,57 @@
+buffer en static : static char	buffer[BUFFER_SIZE + 1];
+
+quand read < buffer_size || il y a \n
+	remplir chaine de char avec les contenus des nodes jusqu'au \n
+	mettre de cote debut next line du dernier buffer si il y a
+	return la ligne
+
+creer-node et l'ajouter a la fin de la liste(buffer, lst)
+	creer node avec buffer en contenu
+	si lst existe pas
+		lst = new
+	sinon
+		ajouter new a la fin de lst
+
+
+gnl()
+	1. get_content()
+
+	2. remplire_la _ligne()
+
+	Free la LST
+	Return  (la ligne)
+
+
+get_content(lst, buffer, fd)
+	if buffer[0] != 0
+		recuperer ce quil y a dedans
+		memcpy (pour gerer overlap) de ce qu'il y apres le \n dans le dernier bufffer a son  debut  ,
+suvi d'un \0
+		envoyer a ft_lstnew_addback
+	if ft_find_n est faux (donne position de n, si trouve pas renvoie -1)
+		while read > 0
+			lire fichier puis envoyer a ft_lstnew_addback
+			if ft_find_n || strlen < buffersize
+			 	return
+
+remplire_la _ligne()
+	malloc de la ligne (str_len_line_list + 1)
+	while (lst)
+		index += lst_copy(lst -> content, ligne + index)
+
+str_len_line_list
+	int i
+	while (lst)
+		i = 0
+		while (lst->content[i] != \n)
+			len++
+			if lst->content[i] == \n
+				return (len)
+			i++
+		lst = lst -> next
+
+int lst_copy
+	refaire un str_copy
+	return (int) //la longueur de la chaine de char copiee
+
+Free()
